@@ -1,5 +1,5 @@
 import SwiftUI
-import Translation
+@preconcurrency import Translation
 
 /// Shows which language packs are already on the device, and lets the user
 /// pull down the missing ones while they still have a connection.

@@ -64,13 +64,14 @@ Apple 的 Translation framework 有個彆扭的限制：`TranslationSession` **�
 
 ## 開發環境
 
-> **注意：iOS 開發需要 macOS + Xcode。** 你目前在 Windows 上，程式碼可以在這裡寫和版控，但編譯、模擬器、上架都必須在 Mac 上做。可行的選項是：借／買一台 Mac、租雲端 Mac（MacStadium、MacinCloud、AWS EC2 Mac），或用 GitHub Actions 的 macOS runner 做 CI build。
+> **注意：iOS 開發需要 macOS + Xcode。** 在別的平台上程式碼可以寫和版控，但編譯、模擬器、上架都必須在 Mac 上做。
 
 需求：
 
 - Xcode 16 以上（`objectVersion = 77` 的同步資料夾格式）
 - 想測 Foundation Models 功能：Xcode 26 + iOS 26 SDK，且要用**實機**（支援 Apple Intelligence 的機型）——模擬器沒有裝置端模型
-- 想測 Translation framework：iOS 18 模擬器即可，但語言包下載在實機上比較可靠
+- 想測 Translation framework：**必須用實機**。模擬器完全不支援，一呼叫就會跳出系統提示「Translation is not supported on simulated devices」，譯文卡片會一直停在載入中
+- 模擬器上仍可驗證的範圍：App 啟動、四個分頁的版面、語言選擇、輸入 debounce 與翻譯佇列有沒有正常送出請求
 
 ## 在 Mac 上跑起來
 

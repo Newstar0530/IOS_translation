@@ -24,7 +24,7 @@ struct OCRService: Sendable {
         request.recognitionLevel = .accurate
         request.usesLanguageCorrection = true
         if let languageHint {
-            let supported = await (try? RecognizeTextRequest.supportedRecognitionLanguages()) ?? []
+            let supported = request.supportedRecognitionLanguages
             if supported.contains(languageHint) {
                 request.recognitionLanguages = [languageHint]
             }

@@ -1,5 +1,8 @@
 import Foundation
-import Translation
+// Translation's types (TranslationSession, LanguageAvailability) are not yet
+// annotated for Swift 6 concurrency; they are only ever touched from the main
+// actor here, so downgrade the Sendable diagnostics to warnings.
+@preconcurrency import Translation
 
 /// Wraps Apple's on-device Translation framework.
 ///
@@ -142,8 +145,10 @@ final class TranslationEngine {
     }
 
     /// Every language pair Apple can translate on this device.
-    func supportedLanguages() async -> [AppLanguage] {
-        let languages = await availability.supportedLanguages
+    nonisolated func supportedLanguages() async -> [AppLanguage] {
+        // A fresh instance: `LanguageAvailability` is not Sendable, so the
+        // stored one cannot cross off the main actor.
+        let languages = await LanguageAvailability().supportedLanguages
         return languages
             .map(AppLanguage.init(language:))
             .sorted { $0.displayName.localizedStandardCompare($1.displayName) == .orderedAscending }
