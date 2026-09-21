@@ -83,7 +83,7 @@ open TranslateAI.xcodeproj
 然後在 Xcode 裡：
 
 1. 選 target `TranslateAI` → Signing & Capabilities → 設你自己的 Team
-2. 把 `PRODUCT_BUNDLE_IDENTIFIER` 從 `com.example.TranslateAI` 改成你自己的
+2. Bundle ID 是 `com.newstar0530.TranslateAI`。fork 的人要改成自己的（`PRODUCT_BUNDLE_IDENTIFIER`）
 3. 選實機 → Run
 
 如果只有 iOS 18 SDK，`FoundationModelsAssistant` 會透過 `#if canImport(FoundationModels)` 整段停用，其餘功能照常編譯。
